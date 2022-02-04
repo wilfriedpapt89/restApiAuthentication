@@ -25,7 +25,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findUserByNaAndUserName(username);
+        User user = userRepository.findUserByUserName(username);
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority("USER_ROLE"));
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorityList);
