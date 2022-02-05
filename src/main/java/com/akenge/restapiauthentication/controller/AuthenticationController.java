@@ -91,10 +91,9 @@ public class AuthenticationController {
         user.setEmail(email);
         user.setPassword(new BCryptPasswordEncoder().encode(password));
         user.setRole("USER");
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-
-        String token = jwtTokenUtil.generateToken(userDetails);
         userRepository.save(user);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+        String token = jwtTokenUtil.generateToken(userDetails);
         responseMap.put("error","false");
         responseMap.put("username",userName);
         responseMap.put("message","Account created successfully");
