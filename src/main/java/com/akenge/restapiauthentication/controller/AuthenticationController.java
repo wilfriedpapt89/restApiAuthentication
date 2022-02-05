@@ -69,11 +69,11 @@ public class AuthenticationController {
             return ResponseEntity.status(500).body(responseMap);
         } catch (BadCredentialsException exception) {
             responseMap.put("error", true);
-            responseMap.put("error", "Invalid credentials");
+            responseMap.put("message", "Invalid credentials");
             return ResponseEntity.status(401).body(responseMap);
         } catch (Exception exception) {
             responseMap.put("error", true);
-            responseMap.put("error", "Something went wrong");
+            responseMap.put("message", "Something went wrong");
             return ResponseEntity.status(500).body(responseMap);
         }
     }
@@ -85,9 +85,9 @@ public class AuthenticationController {
 
         Map<String, Object> responseMap = new HashMap<>();
         User user = new User();
-        user.setUserName(userName);
         user.setFirstName(firstName);
-        user.setLastName(password);
+        user.setLastName(lastName);
+        user.setUserName(userName);
         user.setEmail(email);
         user.setPassword(new BCryptPasswordEncoder().encode(password));
         user.setRole("USER");
